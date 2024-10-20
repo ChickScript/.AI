@@ -1,0 +1,17 @@
+Tools and Techniques
+Tools
+•	GitHub: for project track history, and collaborative work among group members.
+•	python: used for coding and creating the chatbot.
+•	Natural Language Toolkit.
+•	Google Text-to-Speech
+•	Pygame.
+•	Pandas.
+•	TensorFlow.
+Techniques
+•	Use of Natural Language Processing (NLP) to allow the chatbot
+to understand and accurately respond to student queries.
+•	Speech recognition.
+•	Text-to-Speech (TTS).
+•	Machine Learning.
+•	Time series analysis.
+•	Performance tracking.
