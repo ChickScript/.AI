@@ -1,0 +1,36 @@
+Implement Text-to-Speech Functionality
+
+
+
+
+
+# Function to convert text to speech and save as MP3 file
+def text_to_speech(text):
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    filename = f"response_{timestamp}.mp3"
+    
+    tts = gTTS(text)
+    tts.save(filename)
+    print(f"Response saved as {filename}")
+    
+    play_audio(filename)
+
+# Function to play MP3 audio using pygame
+def play_audio(filename):
+    pygame.mixer.init()
+    pygame.mixer.music.load(filename)
+    pygame.mixer.music.play()
+    
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    
+    # Delay to ensure the file is not accessed while still playing
+    pygame.mixer.music.stop()  # Stop playback before attempting to delete
+    pygame.mixer.quit()  # Quit the mixer
+
+    # Attempt to remove the audio file safely
+    try:
+        os.remove(filename)
+        print(f"Successfully deleted {filename}")
+    except PermissionError:
+        print(f"Could not delete {filename}, it may still be in use.")
