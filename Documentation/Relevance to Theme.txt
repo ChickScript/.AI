@@ -1,0 +1,14 @@
+Relevance to Theme:
+
+The problem statement aligns with the Al theme in the following ways:
+
+1. Al-Powered Solutions: Implementing Al-driven chatbots, virtual assistant, or predictive analytics to enhance student navigation, resource discovery, and support.
+
+2. Personalized Support: Leveraging Al to provide tailored guidance, recommendations, and interventions for students.
+
+3. Data-Driven Insights: Utilizing Al to analyse student data, identify trends, and influence decision-making.
+
+4. Automation and Efficiency: Implementing Al to streamline administrative tasks, reduce workload, and enhance resource allocation.
+
+5. Intelligent Systems: Developing Al-powered systems to integrate fragmented support services, improve accessibility, and reduce barriers.
+
