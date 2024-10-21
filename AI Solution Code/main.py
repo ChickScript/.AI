@@ -20,6 +20,7 @@ from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
+
 # Initialize lemmatizer
 # Download NLTK resources (run once)
 nltk.download('punkt')
@@ -217,7 +218,7 @@ embedded_data = {
   
     "campus_information": [
         {"pattern": "library hours", "response": "The library is open from 8 AM to 6 PM, Monday to Friday."},
-        {"pattern": "where is the library", "response": "The library is located on the north side of the campus, near Building C."},
+        {"pattern": "where is the library", "response": "The library is located on the north side of the campus, near Building H."},
         {"pattern": "admin office open", "response": "The admin office operates from 9 AM to 5 PM, Monday to Thursday, and 9 AM to 3 PM on Fridays."},
         {"pattern": "where is the admin office", "response": "The admin office is located in Building A, Room 101."},
         {"pattern": "cafeteria hours", "response": "The cafeteria is open from 7 AM to 7 PM every weekday."},
@@ -274,3 +275,190 @@ embedded_data = {
         {'pattern': 'student governance contact', 'response': 'Office N216. For enquiries, call 016 950 9900 - Tebello Theledi (Administrator).'}
     ]
 }
+
+
+
+
+def preprocess_text(text):
+    # Tokenize the text
+    tokens = nltk.word_tokenize(text.lower())
+    
+    # Remove stop words and apply stemming and lemmatization
+    processed_tokens = [
+        lemmatizer.lemmatize(stemmer.stem(token)) for token in tokens if token.isalpha() and token not in stop_words
+    ]
+    
+    # Join the tokens back into a single string
+    return ' '.join(processed_tokens)
+
+# Prepare the data for training
+def prepare_data(embedded_data):
+    patterns = []
+    labels = []
+    for category, intent_list in embedded_data.items():
+        for intent in intent_list:
+            patterns.append(intent["pattern"])
+            labels.append(category)
+    return patterns, labels
+
+
+
+patterns, labels = prepare_data(embedded_data)
+
+# Check if patterns and labels are populated
+if not patterns or not labels:
+    raise ValueError("No patterns or labels found. Please check the embedded_data.")
+
+label_encoder = LabelEncoder()
+encoded_labels = label_encoder.fit_transform(labels)
+
+# Split the data, ensuring there are enough samples
+if len(patterns) < 2:  # Need at least two samples to perform a split
+    raise ValueError("Not enough data samples to split into train and test sets.")
+
+X_train, X_test, y_train, y_test = train_test_split(patterns, encoded_labels, test_size=0.2, random_state=42)
+
+# Create a pipeline for the deep learning model with custom preprocessing
+pipeline = Pipeline([
+    ('tfidf', TfidfVectorizer(preprocessor=preprocess_text)),  # Use custom preprocessing
+    ('mlp', MLPClassifier(hidden_layer_sizes=(10,), max_iter=1000))  # Multi-layer Perceptron
+])
+
+# Train the model
+pipeline.fit(X_train, y_train)
+
+# Function to evaluate the model
+def evaluate_model():
+    y_pred = pipeline.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f"Accuracy: {accuracy * 100:.2f}%")
+    print(classification_report(y_test, y_pred))
+
+# Call evaluation after training
+evaluate_model()
+
+# Function to get chat response
+def get_chat_response(user_input):
+    user_input = user_input.lower()  # Convert user input to lowercase
+    print(f"User input: '{user_input}'")  # Debugging statement
+
+    # Check for responses in the embedded dataset
+    for category, data_list in embedded_data.items():
+        for data in data_list:
+          # print(f"Checking pattern: '{data['pattern'].lower()}' against input.")  # Debugging statement
+            # Use a more flexible match using 'in' for pattern matching
+            if data["pattern"].lower() in user_input:
+                print(f"Match found: '{data['pattern']}'")  # Debugging statement
+                return data["response"]
+
+    print("No match found.")  # Debugging statement
+    return "Sorry, I don't have information on that yet. Please try asking something else."
+
+
+# Function for speech recognition
+def recognize_speech():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio = recognizer.listen(source)
+        try:
+            user_input = recognizer.recognize_google(audio)
+            print(f"You said: {user_input}")
+            return user_input
+        except sr.UnknownValueError:
+            print("Sorry, I did not understand that.")
+            return ""
+        except sr.RequestError:
+            print("Could not request results from the speech recognition service.")
+            return ""
+
+# Function to convert text to speech and save as MP3 file
+def text_to_speech(text):
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    filename = f"response_{timestamp}.mp3"
+    
+    tts = gTTS(text)
+    tts.save(filename)
+    print(f"Response saved as {filename}")
+    
+    play_audio(filename)
+
+# Function to play MP3 audio using pygame
+def play_audio(filename):
+    pygame.mixer.init()
+    pygame.mixer.music.load(filename)
+    pygame.mixer.music.play()
+    
+    while pygame.mixer.music.get_busy():
+        pygame.time.Clock().tick(10)
+    
+    # Delay to ensure the file is not accessed while still playing
+    pygame.mixer.music.stop()  # Stop playback before attempting to delete
+    pygame.mixer.quit()  # Quit the mixer
+
+    # Attempt to remove the audio file safely
+    try:
+        os.remove(filename)
+        print(f"Successfully deleted {filename}")
+    except PermissionError:
+        print(f"Could not delete {filename}, it may still be in use.")
+
+# Function to fit ARIMA model on historical data 
+def fit_arima_model(data):
+    model = ARIMA(data, order=(5, 1, 0))  # (p,d,q) parameters can be adjusted
+    model_fit = model.fit()
+    return model_fit
+
+#  time series data creation.
+def create_time_series_data():
+    dates = pd.date_range(start='2024-01-01', periods=100, freq='D')
+    values = np.random.randint(1, 100, size=(100,))
+    
+    time_series_data = pd.DataFrame({'date': dates, 'value': values})
+    time_series_data.set_index('date', inplace=True)
+    
+    return time_series_data
+
+# Forecast future values based on historical patterns.
+def forecast_future_values(model_fit):
+    forecasted_values = model_fit.forecast(steps=10)  # Forecasting next 10 days.
+    return forecasted_values.tolist()
+
+# Main loop with forecasting option.
+def main():
+    mode = input("Choose input mode - (T)ype or (S)peak: ").strip().lower()
+
+    # Create dummy time series data and fit ARIMA model.
+    time_series_data = create_time_series_data()
+    fitted_model = fit_arima_model(time_series_data['value'])
+
+    while True:
+        if mode == 't':  # Type mode
+            user_message = input("You: ").strip()
+        elif mode == 's':  # Speech mode
+            user_message = recognize_speech()
+        else:
+            print("Invalid option. Please choose 'T' for Type or 'S' for Speak.")
+            mode = input("Choose input mode - (T)ype or (S)peak: ").strip().lower()
+            continue
+
+        if user_message.lower() == "exit":
+            break
+
+        if user_message:  # Proceed if there is a valid message
+            
+            if user_message.lower() == 'forecast':
+                forecasted_values = forecast_future_values(fitted_model)
+                response = f"The predicted values for the next days are: {forecasted_values}"
+                print(f"Bot: {response}")
+                text_to_speech(response)  # Convert response to speech
+                
+                continue
+            
+            response = get_chat_response(user_message)
+            print(f"Bot: {response}")
+            text_to_speech(response)  # Convert response to speech
+
+# Run the main function
+if __name__ == "__main__":
+    main()
