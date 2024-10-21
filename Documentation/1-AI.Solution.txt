@@ -1,8 +1,0 @@
-1-AI Solution
-In the fast-paced educational environment of today, freshman and senior students often handle a lot of campus life challenges as well as maintain good health for their school life; this could be so worrying at times but there is an AI solution which has come out clearly that it can help us solve these issues by coming up with an all-inclusive app meant for VUT students enabling them to succeed in their academic work besides class activities. Therefore, this artificial intelligent application will improve students’ academic, social as well as wellness l experiences at university so that they can have good time while studying in university. 
-
-This project aligns with the theme of "AI Solution for Industries" by targeting the education sector, a crucial industry where AI has the potential to create a significant positive impact.
-
-⦁	AI Chatbot: The core of the app’s AI functionality will be an intelligent chatbot capable of providing instant responses to student queries. This chatbot will assist with everything from academic counselling to mental health advice.
-⦁	Machine Learning Approaches: The chatbot will use natural language processing (NLP) to understand and respond to student inquiries. Machine learning algorithms will help personalize recommendations based on user data, such as previous interactions or specific academic needs.
-⦁	Data Utilization: The app will collect and analyse data related to student interactions, preferences, and needs. This data will be used to continually improve the AI's responses and the overall user experience
