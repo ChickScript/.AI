@@ -1,0 +1,43 @@
+Integrate Label Encoding for Model Training
+
+
+
+
+
+
+
+
+
+def preprocess_text(text):
+    # Tokenize the text
+    tokens = nltk.word_tokenize(text.lower())
+    
+    # Remove stop words and apply stemming and lemmatization
+    processed_tokens = [
+        lemmatizer.lemmatize(stemmer.stem(token)) for token in tokens if token.isalpha() and token not in stop_words
+    ]
+    
+    # Join the tokens back into a single string
+    return ' '.join(processed_tokens)
+
+# Prepare the data for training
+def prepare_data(embedded_data):
+    patterns = []
+    labels = []
+    for category, intent_list in embedded_data.items():
+        for intent in intent_list:
+            patterns.append(intent["pattern"])
+            labels.append(category)
+    return patterns, labels
+
+
+
+patterns, labels = prepare_data(embedded_data)
+
+# Check if patterns and labels are populated
+if not patterns or not labels:
+    raise ValueError("No patterns or labels found. Please check the embedded_data.")
+
+label_encoder = LabelEncoder()
+encoded_labels = label_encoder.fit_transform(labels)
+
