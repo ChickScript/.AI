@@ -1,0 +1,37 @@
+Implement. ARIMA Time Series Forecasting
+
+#Function to fit ARIMA model on historical data
+
+def fit arima_model (data):
+
+model ARIMA (data, order(5, 1, 0)) parameters can be adjusted #(p,d,q)
+
+model fit model.fit()
+
+return model_fit
+
+#time series data creation.
+
+def create time series_data():
+
+dates pd.date range (start='2024-01-01', periods-100,
+
+freq='D') values np.random.randint(1, 100, size-(100,))
+
+time series data
+
+pd.Datarrame (('date': dates,
+
+'value': values}) time series data.set index('date', inplace=True)
+
+return time series data
+
+#Forecast future values based on historical patterns.
+
+def forecast future values (model fit):
+
+forecasted_values = model_fit.forecast (steps=10) #
+
+Forecasting next 10 days.
+
+return forecasted values.tolist()
