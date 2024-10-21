@@ -1,0 +1,22 @@
+Objectives
+
+• strengthen VUT students through an Al application that provides improved social, physical, mental, and academic wellbeing tips
+
+To display information about student groups, clubs, and activities for socializing.
+
+To promote healthy lifestyle living tips and to show available sport clubs.
+
+Mental wellbeing ensured through access to counselling services and real-time assistance with the help of an Al chatbot. •
+
+• Enhance student academic performance by providing resources that supplement study groups, and access to academic
+advisors and private extra class tutors.
+
+• Navigation on campus should be facilitated with given instructions provided by the Al chatbot
+Business Success Criteria
+
+• User Adoption Rate: The application should reach high adherence and user rates within the VUT community. Improved Student Outcomes: Students' engagement in social, academic, and wellness activities should increase
+
+• Positive Feedback: High rating of user satisfaction from feedback surveys about the usability, usefulness, and relevance of the app
+
+Ease of Navigation: The time spent on moving around campus and accessing key services is reduced. Retention and Academic Performance: The actual improvement in student retention and academic performance based onthe use of the app
+
