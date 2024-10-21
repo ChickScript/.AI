@@ -1,0 +1,48 @@
+Enhance User Interaction with Integrated Time Series Forecasting
+
+
+
+
+
+
+def main():
+    mode = input("Choose input mode - (T)ype or (S)peak: ").strip().lower()
+
+    # Create dummy time series data and fit ARIMA model.
+    time_series_data = create_time_series_data()
+    fitted_model = fit_arima_model(time_series_data['value'])
+
+    while True:
+        if mode == 't':  # Type mode
+            user_message = input("You: ").strip()
+        elif mode == 's':  # Speech mode
+            user_message = recognize_speech()
+        else:
+            print("Invalid option. Please choose 'T' for Type or 'S' for Speak.")
+            mode = input("Choose input mode - (T)ype or (S)peak: ").strip().lower()
+            continue
+
+        if user_message.lower() == "exit":
+            break
+
+        if user_message:  # Proceed if there is a valid message
+            
+            if user_message.lower() == 'forecast':
+                forecasted_values = forecast_future_values(fitted_model)
+                response = f"The predicted values for the next days are: {forecasted_values}"
+                print(f"Bot: {response}")
+                text_to_speech(response)  # Convert response to speech
+                
+                continue
+            
+            response = get_chat_response(user_message)
+            print(f"Bot: {response}")
+            text_to_speech(response)  # Convert response to speech
+
+# Run the main function
+if __name__ == "__main__":
+    main()
+
+
+
+
