@@ -1,0 +1,35 @@
+Enhance Chat Functionality with Speech Recognition
+
+# Function to get chat response
+def get_chat_response(user_input):
+    user_input = user_input.lower()  # Convert user input to lowercase
+    print(f"User input: '{user_input}'")  # Debugging statement
+
+    # Check for responses in the embedded dataset
+    for category, data_list in embedded_data.items():
+        for data in data_list:
+          # print(f"Checking pattern: '{data['pattern'].lower()}' against input.")  # Debugging statement
+            # Use a more flexible match using 'in' for pattern matching
+            if data["pattern"].lower() in user_input:
+                print(f"Match found: '{data['pattern']}'")  # Debugging statement
+                return data["response"]
+
+    print("No match found.")  # Debugging statement
+    return "Sorry, I don't have information on that yet. Please try asking something else."
+
+# Function for speech recognition
+def recognize_speech():
+    recognizer = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        audio = recognizer.listen(source)
+        try:
+            user_input = recognizer.recognize_google(audio)
+            print(f"You said: {user_input}")
+            return user_input
+        except sr.UnknownValueError:
+            print("Sorry, I did not understand that.")
+            return ""
+        except sr.RequestError:
+            print("Could not request results from the speech recognition service.")
+            return ""
