@@ -1,0 +1,4 @@
+Constraints
+•	Budget: R10 000 initial budget for marketing and creating the app.
+•	Technology: The application should run on windows and macOS operating systems.
+•	Time of Launch: The application should go online at the start of the next academic year to ensure it achieves maximum impact.

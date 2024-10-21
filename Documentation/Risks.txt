@@ -1,0 +1,4 @@
+Risks
+•	Adoption Risk: If students are not aware of this app or the app does not meet the requirements, then it will lead to low adoption.
+•	Security Risk: All sensitive information about different counselling conversations would come out if there is a data leak.
+•	Technical Risk: directions are not completely accurate or the responses in AI chat are slow and may not be that responsive also.
