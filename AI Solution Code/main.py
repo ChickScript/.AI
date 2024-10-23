@@ -26,7 +26,7 @@ stemmer = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
 stop_words = set(stopwords.words('english'))
 
-# Your embedded data with timestamps for time-based indexing
+# embedded data with timestamps for time-based indexing
 embedded_data = {
   
     "greetings": [
@@ -204,7 +204,7 @@ embedded_data = {
         {"pattern": "Comprehensive Primary Health Care Services", "description": "General health services for students and staff."},
         {"pattern": "Chronic Health Care", "description": "Management and support for chronic health conditions."},
         {"pattern": "Underweight Management", "description": "Support and guidance for individuals underweight."},
-        # (Other services...)
+        
     ],
   
     "campus_information": [
@@ -324,7 +324,6 @@ def evaluate_model():
 # Call evaluation after training
 evaluate_model()
 
-# Rest of your chatbot and time series forecasting code remains the same
 
 def get_chat_response(user_input):
     user_input = user_input.lower()
