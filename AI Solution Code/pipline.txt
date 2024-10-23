@@ -1,0 +1,8 @@
+# Create a pipeline for the deep learning model with custom preprocessing
+pipeline = Pipeline([
+    ('tfidf', TfidfVectorizer(preprocessor=preprocess_text)),  # Use custom preprocessing
+    ('mlp', MLPClassifier(hidden_layer_sizes=(10,), max_iter=1000))  # Multi-layer Perceptron
+])
+
+# Train the model
+pipeline.fit(X_train, y_train)
