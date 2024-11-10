@@ -1,0 +1,73 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    font-family: 'Inter', sans-serif;
+}
+
+h1 {
+    color: #333;
+}
+
+input[type="text"] {
+    padding: 8px; /* Padding inside the textbox */
+    margin-right: 5; /* No margin on the right */
+    width: calc(100% - 20px); /* Adjust width to accommodate padding */
+    border-radius: 5px; /* Smoothen corners */
+    border: 1px solid #ccc; /* Border for visibility */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+
+button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#response {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+#chatbox {
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 700px;
+    width: 60%; /* Set a width to control the size */
+    margin: 0 auto; /* Center the chatbox */
+    overflow-y: auto; /* Enable vertical scrolling */
+    box-sizing: border-box; /* Include padding and border in the width */
+    border:none;
+
+}
+
+#chatInputContainer {
+    position: fixed; /* Change from sticky to fixed */
+    bottom: 0; /* Stick to the bottom of the viewport */
+    left: 0; /* Align to the left of the screen */
+    right: 0; /* Align to the right of the screen */
+    background-color: white; /* Optional: add background color for visibility */
+    padding: 10px; /* Optional: add padding */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional: add shadow for depth */
+}
+
+
+.user-message {
+    margin-bottom: 5px;
+    text-align: right; /* Align user messages to the right */
+}
+
+.bot-message {
+    margin-bottom: 5px;
+}
